@@ -66,7 +66,7 @@ Because the folder demospades is in my home directory. Next, you must type this 
 
 The output is this:
 
-![FastQC open](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/fastqc.png)
+![FastQC open](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/output-pear.png)
 
 
 ## Determining the pangenome

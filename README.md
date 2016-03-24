@@ -13,7 +13,7 @@ Once you have instaled, you must dowload the fastq for this tutorial. Just type 
 
 	fastq-dump --split-files --accession SRR1776954 --outdir demospades
 
-On folder demospades you have 2 fastq (~ 4,73 GB) from *Mycoplasma mycoides subsp. mycoides* reported in *High quality draft genomes of the Mycoplasma mycoides subsp. mycoides challenge strains Afadé and B237* [PMID: 26516405](http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/26516405/).
+Move to folder demospades, there you have 2 fastq (~ 4,73 GB) from *Mycoplasma mycoides subsp. mycoides* reported in *High quality draft genomes of the Mycoplasma mycoides subsp. mycoides challenge strains Afadé and B237* [PMID: 26516405](http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/26516405/).
 
 ![genomes](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/demospades.png)
 
@@ -33,35 +33,41 @@ When FastQC finish the analysis, you will see something like this.
 
 ![FastQC open](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/fastqc.png)
 
-You can click on any submenu and see the stats. Primarily the 2º submenu is very important, this menu give a general view of quality of all your read. In summary, if the menu is green, it's ok, else, it is not ok. For more information you can see de [documentation](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+You can click on any submenu and see the stats. Primarily the 2º submenu is very important, this menu give a general view of quality of all your read. In summary, if the check is green, it's ok, else, it is not ok. For more information you can see de [documentation](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
 Either way, in the next step, we going to filter and merge the reads by quality whit PEAR.
 
-<!--HASTA AQUI-->
+## Filter and merge of the reads
 
-You should end up with 11 files including a .gff file. 
+PEAR is a program write in C, so this step will be very fast, first of all we need download and install the program following [this tutorial](http://sco.h-its.org/exelixis/web/software/pear/doc.html#installing) in summary you must type this:
 
-![Prokka output](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/prokka.png)
+	mkdir $HOME/pear
+	git clone https://github.com/xflouris/PEAR.git
+	cd pear
+	./autogen.sh
+	./configure --prefix=$HOME/pear
+	make
+	make install
+	echo 'export PATH=/Users/Enzo/pear/bin:${PATH}' >> .bash_profile
+	source .bash_profile
 
-I'm copying a description of the output files from the Prokka documentation here, but please check with the developers for in-depth documentation.
+**NOTE 1: You must change the username "Enzo" by the name of your home.**
+**NOTE 2: You must to have instaled git in your Mac**
+**NOTE 3: If you can't install from the source, in this [link](addlink) i upload the binary.**
 
-### Output Files
 
-| Extension | Description |
-| --------- | ----------- |
-| .gff | This is the master annotation in GFF3 format, containing both sequences and annotations. It can be viewed directly in Artemis or IGV. |
-| .gbk | This is a standard Genbank file derived from the master .gff. If the input to prokka was a multi-FASTA, then this will be a multi-Genbank, with one record for each sequence. |
-| .fna | Nucleotide FASTA file of the input contig sequences. |
-| .faa | Protein FASTA file of the translated CDS sequences. |
-| .ffn | Nucleotide FASTA file of all the annotated sequences, not just CDS. |
-| .sqn | An ASN1 format "Sequin" file for submission to Genbank. It needs to be edited to set the correct taxonomy, authors, related publication etc. |
-| .fsa | Nucleotide FASTA file of the input contig sequences, used by "tbl2asn" to create the .sqn file. It is mostly the same as the .fna file, but with extra Sequin tags in the sequence description lines. |
-| .tbl | Feature Table file, used by "tbl2asn" to create the .sqn file. |
-| .err | Unacceptable annotations - the NCBI discrepancy report. |
-| .log | Contains all the output that Prokka produced during its run. This is a record of what settings you used, even if the --quiet option was enabled. |
-| .txt | Statistics relating to the annotated features found. |
+Now go to folder demospades, in my case i must type in the terminal this.
 
-GFF files are the input for Roary to compute the pangenome and contain all the annotations plus the genome sequence in fasta format appended at the end.
+	cd ~/demospades
+
+Because the folder demospades is in my home directory. Next, you must type this in the terminal:
+
+	pear -f SRR1776954_1.fastq -r SRR1776954_2.fastq -v 20 -q 20 -u 0 -j 4 -o merged
+
+The output is this:
+
+![FastQC open](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/fastqc.png)
+
 
 ## Determining the pangenome
 

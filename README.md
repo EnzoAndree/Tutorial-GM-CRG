@@ -136,6 +136,10 @@ This is a description of the output files from the Prokka documentation.
 | .log | Contains all the output that Prokka produced during its run. This is a record of what settings you used, even if the --quiet option was enabled. |
 | .txt | Statistics relating to the annotated features found. |
 
+## Author notes
+
+To the end of this tutorial you get a genome assembly and annotation. Nevertheless this is a general tutorial and does not take account problems like contamination of library. For example, for anterior problem you must to filter the raw data in positive, in this case remove all reads that match with human genome or plant genome.
+
 ## Citation
 
 Seemann T.  
@@ -147,4 +151,9 @@ Anton Bankevich, Sergey Nurk, Dmitry Antipov, Alexey A. Gurevich, Mikhail Dvorki
 *SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing*  
 **J Comput Biol.** 2012 May;19(5):455-77.  
 [PMID: 22506599](https://www.ncbi.nlm.nih.gov/pubmed/22506599)
+
+Jiajie Zhang, Kassian Kobert, Tomáš Flouri and Alexandros Stamatakis  
+*PEAR: a fast and accurate Illumina Paired-End reAd mergeR*  
+**Bioinformatics.** 2014 Mar 1;30(5):614-20.  
+[PMID: 24142950](http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/24142950)
 

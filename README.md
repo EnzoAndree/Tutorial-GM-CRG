@@ -9,6 +9,20 @@ This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and
 
 If you want know how install SRA toolkit visit this [tutorial](https://github.com/microgenomics/tutorials/blob/master/sra.md).
 
+You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software) site and download MacOS 64 bit architecture file. Double-click on sratoolkit.2.5.7-mac64.tar.gz to uncompress the file and again on sratoolkit.2.5.7-mac64.tar. Now you must move the folder sratoolkit.2.5.7-mac64 to your home directoy, in my case is /Users/Enzo/sratoolkit.2.5.7-mac64. next, you must open the terminal, the easy way is pressing **CMD ⌘ + SPACE** and type "terminal" and click on it, or press Intro:
+
+![Open terminal](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/open-terminal.png)
+
+Congratulation!, you are a bioinformatics now 😎.
+
+![blank terminal](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/blank-terminal.png)
+
+Next in the terminal type this:
+
+	cd
+	echo 'export PATH=$HOME/sratoolkit.2.5.4-mac64/bin:${PATH}' >> .bash_profile
+	source .bash_profile
+
 Once you have instaled, you must dowload the fastq for this tutorial. Just type in the terminal:
 
 	fastq-dump --split-files --accession SRR1776954 --outdir demospades
@@ -80,7 +94,7 @@ Now we get a great quality, all over Q30.
 
 Now you can use SPAdes for assembly this genome. For install SPAdes in your mac, you have to download the last version of SPAdes for Mac [here](http://bioinf.spbau.ru/en/content/spades-download-0).
 
-Next, open SPAdes-3.7.1-Darwin.tar.gz and open again SPAdes-3.7.1-Darwin.tar. the folder now you must move the folder SPAdes-3.7.1-Darwin to your home directoy, in my case is /Users/Enzo/SPAdes-3.7.1-Darwin. next, you must type in the terminal:
+Next, open SPAdes-3.7.1-Darwin.tar.gz and open again SPAdes-3.7.1-Darwin.tar. Now you must move the folder SPAdes-3.7.1-Darwin to your home directoy, in my case is /Users/Enzo/SPAdes-3.7.1-Darwin. next, you must type in the terminal:
 
 	cd
 	echo 'export PATH=$HOME/SPAdes-3.7.1-Darwin/bin:${PATH}' >> .bash_profile

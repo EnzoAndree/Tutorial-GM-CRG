@@ -1,4 +1,4 @@
-![The Gut Microbiota and Clostridia Research](img/GM&CR.png)
+[![The Gut Microbiota and Clostridia Research](img/GM&CR.png)](http://www.microbioma.cl/)
 
 # A pipeline for the de novo assembly of paired-end Illumina reads using SPAdes
 #### This pipeline takes 7 hours in a MacBook Air 1,3 GHz Intel Core i5 4 GB 1600 MHz DDR3 and need ≈10 Gb in your hard drive
@@ -11,7 +11,7 @@ You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Tr
 
 ![Open terminal](img/open-terminal.png)
 
-Congratulation!, you are a bioinformatics now 😎.
+Congratulation!, you are a bioinformatic now 😎.
 
 ![blank terminal](img/blank-terminal.png)
 
@@ -96,7 +96,7 @@ Now we get a great quality, all over Q30.
 
 Now you can use SPAdes for assembly this genome. For install SPAdes in your mac, you have to download the last version of SPAdes for Mac [here](http://bioinf.spbau.ru/en/content/spades-download-0).
 
-Next, open SPAdes-3.7.1-Darwin.tar.gz and open again SPAdes-3.7.1-Darwin.tar. Now you must move the folder SPAdes-3.7.1-Darwin to your home directoy, in my case is /Users/Enzo/SPAdes-3.7.1-Darwin. next, you must type in the terminal:
+Next, open SPAdes-3.7.1-Darwin.tar.gz and open again SPAdes-3.7.1-Darwin.tar. Now you must move the folder SPAdes-3.7.1-Darwin to your home directory, in my case is /Users/Enzo/SPAdes-3.7.1-Darwin. next, you must type in the terminal:
 
 	cd
 	echo 'export PATH=$HOME/SPAdes-3.7.1-Darwin/bin:${PATH}' >> .bash_profile
@@ -111,7 +111,7 @@ Inside of folder that you set before "spades_assembled", you have a lot of files
 
 ## And now what?
 
-In this point you have an assembly ready, but you have none information of what is encode in the genome. For this, you have to annotate your genome, using programs like [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml). For this, you probably must install a lot of dependences, just read the [documentation](https://github.com/tseemann/prokka/blob/master/README.md) for a correct installation. When you have Prokka installed in your system, just type this in the terminal:
+In this point you have an assembly ready, but you have none information of what is encode in the genome. For this, you have to annotate your genome, using programs like [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml). For this, you probably must install a lot of dependencies, just read the [documentation](https://github.com/tseemann/prokka/blob/master/README.md) for a correct installation. When you have Prokka installed in your system, just type this in the terminal:
 
 	prokka --compliant --centre MYC --locustag MYC spades_assembled/scaffolds.fasta
 

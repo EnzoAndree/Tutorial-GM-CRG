@@ -64,7 +64,7 @@ PEAR is a program write in C, so this step will be very fast, first of all we ne
 	source .bash_profile
 
 **NOTE 1: You must to have instaled git in your Mac**  
-**NOTE 2: If you can't install from the source, in this [link](https://github.com/eandree/TutorialDeNovoAssembly/tree/master/pear) i upload the binaries. In this case you must move the folder to you home and type this:**
+**NOTE 2: If you can't install from the source, in this [link](https://github.com/eandree/TutorialDeNovoAssembly/raw/master/pear.zip) i upload the binaries. In this case you must move the folder to you home and type this:**
 
 	cd
 	echo 'export PATH=$HOME/pear:${PATH}' >> .bash_profile

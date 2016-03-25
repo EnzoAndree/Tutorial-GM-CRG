@@ -103,7 +103,7 @@ Now let's go to assemble, type in the terminal:
 	cd demospades/
 	spades.py -s merged.assembled.fastq --threads 4 --careful --cov-cutoff auto -o spades_assembled
 
- 
+Inside of folder that you set before "spades_assembled", you have a lot of files, in summary, you output files and in consequence your final assembly are content in 2 files, **contigs.fasta** and **scaffolds.fasta**, this is, the **contigs** and **scaffolds** of assembly respectively
 
 ## Citation
 

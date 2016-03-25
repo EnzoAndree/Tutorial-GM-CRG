@@ -58,6 +58,7 @@ Either way, in the next step, we going to filter and merge the reads by quality 
 
 PEAR is a program write in C, so this step will be very fast (less than 40 minutes), first of all we need download and install the program following [this tutorial](http://sco.h-its.org/exelixis/web/software/pear/doc.html#installing) in summary you must type this:
 
+	cd
 	mkdir $HOME/pear
 	git clone https://github.com/xflouris/PEAR.git
 	cd pear

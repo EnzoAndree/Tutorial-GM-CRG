@@ -1,6 +1,6 @@
 # A pipeline for the de novo assembly of paired-end Illumina reads using SPAdes
 -------------------------
-#### This pipeline takes 5 hours in a MacBook Air 1,3 GHz Intel Core i5 4 GB 1600 MHz DDR3 with reads of PUC64 and need ≈5 Gb in your hard drive
+#### This pipeline takes 7 hours in a MacBook Air 1,3 GHz Intel Core i5 4 GB 1600 MHz DDR3 and need ≈10 Gb in your hard drive
 
 This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and *Prokka* so please remember to cite them if you end up publishing results obtained with these tools.
 
@@ -107,6 +107,34 @@ Now let's go to assemble, type in the terminal:
 	spades.py -s merged.assembled.fastq --threads 4 --careful --cov-cutoff auto -o spades_assembled
 
 Inside of folder that you set before "spades_assembled", you have a lot of files, in summary, you output files and in consequence your final assembly are content in 2 files, **contigs.fasta** and **scaffolds.fasta**, this is, the **contigs** and **scaffolds** of assembly respectively
+
+## And now what?
+
+In this point you have an assembly ready, but you have none information of what is encode in the genome. For this, you have to annotate your genome, using programs like [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml). For this, you probably must install a lot of dependences, just read the [documentation](https://github.com/tseemann/prokka/blob/master/README.md) for a correct installation. When you have Prokka installed in your system, just type this in the terminal:
+
+	prokka --compliant --centre MYC --locustag MYC spades_assembled/scaffolds.fasta
+
+You should end up with 11 files including a .gff file. 
+
+![Prokka output](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/prokka-out.png)
+
+This is a description of the output files from the Prokka documentation.
+
+### Output Files
+
+| Extension | Description |
+| --------- | ----------- |
+| .gff | This is the master annotation in GFF3 format, containing both sequences and annotations. It can be viewed directly in Artemis or IGV. |
+| .gbk | This is a standard Genbank file derived from the master .gff. If the input to prokka was a multi-FASTA, then this will be a multi-Genbank, with one record for each sequence. |
+| .fna | Nucleotide FASTA file of the input contig sequences. |
+| .faa | Protein FASTA file of the translated CDS sequences. |
+| .ffn | Nucleotide FASTA file of all the annotated sequences, not just CDS. |
+| .sqn | An ASN1 format "Sequin" file for submission to Genbank. It needs to be edited to set the correct taxonomy, authors, related publication etc. |
+| .fsa | Nucleotide FASTA file of the input contig sequences, used by "tbl2asn" to create the .sqn file. It is mostly the same as the .fna file, but with extra Sequin tags in the sequence description lines. |
+| .tbl | Feature Table file, used by "tbl2asn" to create the .sqn file. |
+| .err | Unacceptable annotations - the NCBI discrepancy report. |
+| .log | Contains all the output that Prokka produced during its run. This is a record of what settings you used, even if the --quiet option was enabled. |
+| .txt | Statistics relating to the annotated features found. |
 
 ## Citation
 

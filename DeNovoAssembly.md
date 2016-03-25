@@ -27,7 +27,7 @@ Next in the terminal type this:
 	brew install wget
 	sudo cpan Time::Piece XML::Simple Bio::Perl
 
-
+### By careful in this tutorial with the version downloaded, if it is diferent, you must change the comandlines.
 
 ## Obtaining data
 
@@ -92,6 +92,9 @@ PEAR is a program write in C, so this step will be very fast (less than 40 minut
 	echo 'export PATH=$HOME/pear:${PATH}' >> .bash_profile
 	source .bash_profile
 
+**Another option is type this in the terminal, but the version installed by this way is NOT the last version:**
+
+	brew install pear
 
 Now go to folder demospades, in my case i must type in the terminal this.
 
@@ -111,7 +114,7 @@ You can use FastQC to re-check the quality of the new fastq.
 
 ![PEAR quality](img/read-post-pear.png)
 
-Now we get a great quality, all over Q30.
+Now we get a great quality, all over Q30, and reads very largest.
 
 ## Let's go SPAdes!
 

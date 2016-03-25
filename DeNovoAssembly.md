@@ -146,7 +146,7 @@ This is a description of the output files from the Prokka documentation.
 
 ###### Enzo Guerrero-Araya
 
-To the end of this tutorial you get a genome assembly and annotation. Nevertheless this is a general tutorial and does not take account problems like contamination of library. For example, for anterior problem you must to filter the raw data in positive, in this case remove all reads that match with human genome or plant genome.
+To the end of this tutorial you get a genome assembly and its annotation. Nevertheless this is a general tutorial and does not take account problems like contamination of library. For example, for anterior problem you must to filter the raw data in positive, in this case remove all reads that match with human genome or plant genome.
 
 ## Citation
 

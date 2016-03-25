@@ -6,19 +6,34 @@
 
 This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and *Prokka* so please remember to cite them if you end up publishing results obtained with these tools.
 
-## Obtaining data
+## Prepare your Mac
 
-You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software) site and download MacOS 64 bit architecture file. Double-click on sratoolkit.2.5.7-mac64.tar.gz to uncompress the file and again on sratoolkit.2.5.7-mac64.tar. Now you must move the folder sratoolkit.2.5.7-mac64 to your home directoy, in my case is /Users/Enzo/sratoolkit.2.5.7-mac64.
+### Installing the package manager brew
 
-![Home folder](img/home.png)
-
-Next, you must open the terminal, the easy way is pressing **CMD ⌘ + SPACEBAR** and type "terminal" and click on it, or press Intro:
+You must open the terminal, the easy way is pressing **CMD ⌘ + SPACEBAR** and type "terminal" and click on it, or press Intro:
 
 ![Open terminal](img/open-terminal.png)
 
 Congratulation!, you are a bioinformatic now 😎.
 
 ![blank terminal](img/blank-terminal.png)
+
+Next in the terminal type this:
+
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	brew doctor
+	brew update
+	brew install git
+	brew install wget
+	sudo cpan Time::Piece XML::Simple Bio::Perl
+
+
+
+## Obtaining data
+
+You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software) site and download MacOS 64 bit architecture file. Double-click on sratoolkit.2.5.7-mac64.tar.gz to uncompress the file and again on sratoolkit.2.5.7-mac64.tar. Now you must move the folder sratoolkit.2.5.7-mac64 to your home directoy, in my case is /Users/Enzo/sratoolkit.2.5.7-mac64.
+
+![Home folder](img/home.png)
 
 Next in the terminal type this:
 
@@ -119,7 +134,14 @@ When SPAdes finished, inside of folder that you set before "spades_assembled", y
 
 ## And now what?
 
-In this point you have an assembly ready, but you have none information of what is encode in the genome. For this, you have to annotate your genome, using programs like [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml). For this, you probably must install a lot of dependencies, just read the [documentation](https://github.com/tseemann/prokka/blob/master/README.md) for a correct installation. When you have Prokka installed in your system, just type this in the terminal:
+In this point you have an assembly ready, but you have none information of what is encode in the genome. For this, you have to annotate your genome, using programs like [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml). For this, you probably must install a lot of dependencies, just read the [documentation](https://github.com/tseemann/prokka/blob/master/README.md) for a correct installation. Briefly type in the terminal this:
+
+	brew tap homebrew/science
+	brew update
+	brew install prokka
+	prokka --setupdb
+
+When you have Prokka installed in your system, just type this in the terminal:
 
 	prokka --compliant --centre MYC --locustag MYC spades_assembled/scaffolds.fasta
 

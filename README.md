@@ -53,7 +53,7 @@ PEAR is a program write in C, so this step will be very fast, first of all we ne
 	source .bash_profile
 
 **NOTE 1: You must to have instaled git in your Mac**
-**NOTE 2: If you can't install from the source, in this [link](addlink) i upload the binary.**
+**NOTE 2: If you can't install from the source, in this [link](https://github.com/eandree/TutorialDeNovoAssembly/tree/master/pear) i upload the binaries.**
 
 
 Now go to folder demospades, in my case i must type in the terminal this.
@@ -97,11 +97,11 @@ Now let's go to assemble, type in the terminal:
 
 Seemann T.  
 *Prokka: rapid prokaryotic genome annotation*  
-**Bioinformatics** 2014 Jul 15;30(14):2068-9.   
+**Bioinformatics** 2014 Jul 15;30(14):2068-9.  
 [PMID:24642063](http://www.ncbi.nlm.nih.gov/pubmed/24642063)  
 
-Andrew J. Page, Carla A. Cummins, Martin Hunt, Vanessa K. Wong, Sandra Reuter, Matthew T. G. Holden, Maria Fookes, Daniel Falush, Jacqueline A. Keane, Julian Parkhill.   
-*Roary: Rapid large-scale prokaryote pan genome analysis*  
-**Bioinformatics** 2015 Jul 20. pii: btv421  
-[PMID: 26198102](http://www.ncbi.nlm.nih.gov/pubmed/26198102)
+Anton Bankevich, Sergey Nurk, Dmitry Antipov, Alexey A. Gurevich, Mikhail Dvorkin, Alexander S. Kulikov, Valery M. Lesin, Sergey I. Nikolenko, Son Pham, Andrey D. Prjibelski, Alexey V. Pyshkin, Alexander V. Sirotkin, Nikolay Vyahhi, Glenn Tesler, Max A. Alekseyev, and Pavel A. Pevzner.   
+*SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing*  
+**J Comput Biol.** 2012 May;19(5):455-77.  
+[PMID: 22506599](https://www.ncbi.nlm.nih.gov/pubmed/22506599)
 

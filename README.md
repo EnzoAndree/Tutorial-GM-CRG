@@ -1,5 +1,7 @@
+![The Gut Microbiota and Clostridia Research Group](img/GM&CR.png)
+
 # A pipeline for the de novo assembly of paired-end Illumina reads using SPAdes
--------------------------
+----
 #### This pipeline takes 7 hours in a MacBook Air 1,3 GHz Intel Core i5 4 GB 1600 MHz DDR3 and need ≈10 Gb in your hard drive
 
 This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and *Prokka* so please remember to cite them if you end up publishing results obtained with these tools.
@@ -8,11 +10,11 @@ This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and
 
 You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software) site and download MacOS 64 bit architecture file. Double-click on sratoolkit.2.5.7-mac64.tar.gz to uncompress the file and again on sratoolkit.2.5.7-mac64.tar. Now you must move the folder sratoolkit.2.5.7-mac64 to your home directoy, in my case is /Users/Enzo/sratoolkit.2.5.7-mac64. Next, you must open the terminal, the easy way is pressing **CMD ⌘ + SPACEBAR** and type "terminal" and click on it, or press Intro:
 
-![Open terminal](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/open-terminal.png)
+![Open terminal](img/open-terminal.png)
 
 Congratulation!, you are a bioinformatics now 😎.
 
-![blank terminal](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/blank-terminal.png)
+![blank terminal](img/blank-terminal.png)
 
 Next in the terminal type this:
 
@@ -26,7 +28,7 @@ Once you have instaled, you must dowload the fastq for this tutorial. Just type 
 
 Go to folder demospades, there you have 2 fastq (~ 4,73 GB) from *Mycoplasma mycoides subsp. mycoides* reported in *High quality draft genomes of the Mycoplasma mycoides subsp. mycoides challenge strains Afadé and B237* [PMID: 26516405](http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/26516405/).
 
-![genomes](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/demospades.png)
+![genomes](img/demospades.png)
 
 ## Genome assembly
 
@@ -34,15 +36,15 @@ In the fastq we have the rawdata of the sequencer, in this demo is from a Illumi
 
 You have to open the file *fastqc_v0.11.5.dmg* and move to folder *Applications*
 
-![FastQC install](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/install-fastqc.png)
+![FastQC install](img/install-fastqc.png)
 
 Open FastQC and in the top menu clik on "File > Open" and find the fastq files, select and open it.
 
-![FastQC open](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/open-menu.png)
+![FastQC open](img/open-menu.png)
 
 When FastQC finish the analysis, you will see something like this. 
 
-![FastQC open](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/fastqc.png)
+![FastQC open](img/fastqc.png)
 
 You can click on any submenu and see the stats. Primarily the 2º submenu is very important, this menu give a general view of quality of all your read. In summary, if the check is green, it's ok, else, it is not ok. For more information you can see de [documentation](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
@@ -81,13 +83,13 @@ Because the folder demospades is in my home directory. Next, you must type this 
 
 The output is this:
 
-![PEAR output](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/output-pear.png)
+![PEAR output](img/output-pear.png)
 
 As you can see, only 11.396% of the reads was not merged. If you wanna learn more check the [documentation](http://sco.h-its.org/exelixis/web/software/pear/doc.html)
 
 You can use FastQC to re-check the quality of the new fastq.
 
-![PEAR quality](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/read-post-pear.png)
+![PEAR quality](img/read-post-pear.png)
 
 Now we get a great quality, all over Q30.
 
@@ -116,7 +118,7 @@ In this point you have an assembly ready, but you have none information of what 
 
 You should end up with 11 files including a .gff file. 
 
-![Prokka output](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/prokka-out.png)
+![Prokka output](img/prokka-out.png)
 
 This is a description of the output files from the Prokka documentation.
 

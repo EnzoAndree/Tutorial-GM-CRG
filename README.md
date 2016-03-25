@@ -1,4 +1,3 @@
-![banner](https://raw.githubusercontent.com/microgenomics/tutorials/master/img/microgenomics.png)
 # A pipeline for the de novo assembly of paired-end Illumina reads using SPAdes
 -------------------------
 #### This pipeline takes 5 hours in a MacBook Air 1,3 GHz Intel Core i5 4 GB 1600 MHz DDR3 with reads of PUC64 and need ≈5 Gb in your hard drive
@@ -7,7 +6,7 @@ This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and
 
 ## Obtaining data
 
-You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software) site and download MacOS 64 bit architecture file. Double-click on sratoolkit.2.5.7-mac64.tar.gz to uncompress the file and again on sratoolkit.2.5.7-mac64.tar. Now you must move the folder sratoolkit.2.5.7-mac64 to your home directoy, in my case is /Users/Enzo/sratoolkit.2.5.7-mac64. next, you must open the terminal, the easy way is pressing **CMD ⌘ + SPACEBAR** and type "terminal" and click on it, or press Intro:
+You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software) site and download MacOS 64 bit architecture file. Double-click on sratoolkit.2.5.7-mac64.tar.gz to uncompress the file and again on sratoolkit.2.5.7-mac64.tar. Now you must move the folder sratoolkit.2.5.7-mac64 to your home directoy, in my case is /Users/Enzo/sratoolkit.2.5.7-mac64. Next, you must open the terminal, the easy way is pressing **CMD ⌘ + SPACEBAR** and type "terminal" and click on it, or press Intro:
 
 ![Open terminal](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/open-terminal.png)
 
@@ -25,7 +24,7 @@ Once you have instaled, you must dowload the fastq for this tutorial. Just type 
 
 	fastq-dump --split-files --accession SRR1776954 --outdir demospades
 
-Move to folder demospades, there you have 2 fastq (~ 4,73 GB) from *Mycoplasma mycoides subsp. mycoides* reported in *High quality draft genomes of the Mycoplasma mycoides subsp. mycoides challenge strains Afadé and B237* [PMID: 26516405](http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/26516405/).
+Go to folder demospades, there you have 2 fastq (~ 4,73 GB) from *Mycoplasma mycoides subsp. mycoides* reported in *High quality draft genomes of the Mycoplasma mycoides subsp. mycoides challenge strains Afadé and B237* [PMID: 26516405](http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/26516405/).
 
 ![genomes](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/demospades.png)
 
@@ -65,7 +64,11 @@ PEAR is a program write in C, so this step will be very fast, first of all we ne
 	source .bash_profile
 
 **NOTE 1: You must to have instaled git in your Mac**  
-**NOTE 2: If you can't install from the source, in this [link](https://github.com/eandree/TutorialDeNovoAssembly/tree/master/pear) i upload the binaries.**
+**NOTE 2: If you can't install from the source, in this [link](https://github.com/eandree/TutorialDeNovoAssembly/tree/master/pear) i upload the binaries. In this case you must move the folder to you home and type this:**
+
+	cd
+	echo 'export PATH=$HOME/pear:${PATH}' >> .bash_profile
+	source .bash_profile
 
 
 Now go to folder demospades, in my case i must type in the terminal this.

@@ -48,12 +48,12 @@ PEAR is a program write in C, so this step will be very fast, first of all we ne
 	./configure --prefix=$HOME/pear
 	make
 	make install
-	echo 'export PATH=/Users/Enzo/pear/bin:${PATH}' >> .bash_profile
+	cd
+	echo 'export PATH=$HOME/pear/bin:${PATH}' >> .bash_profile
 	source .bash_profile
 
-**NOTE 1: You must change the username "Enzo" by the name of your home.**
-**NOTE 2: You must to have instaled git in your Mac**
-**NOTE 3: If you can't install from the source, in this [link](addlink) i upload the binary.**
+**NOTE 1: You must to have instaled git in your Mac**
+**NOTE 2: If you can't install from the source, in this [link](addlink) i upload the binary.**
 
 
 Now go to folder demospades, in my case i must type in the terminal this.
@@ -68,101 +68,29 @@ The output is this:
 
 ![PEAR output](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/output-pear.png)
 
+As you can see, only 11.396% of the reads was not merged. If you wanna learn more check the [documentation](http://sco.h-its.org/exelixis/web/software/pear/doc.html)
 
+You can use FastQC to re-check the quality of the new fastq.
 
-## Determining the pangenome
+![PEAR quality](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/read-post-pear.png)
 
-Let's put all the .gff files in the same folder (e.g., `./gff`) and run *Roary*
-		
-		roary -f ./demo -e -n -v ./gff/*.gff
+Now we get a great quality, all over Q30.
 
-Roary will get all the coding sequences, convert them into protein, and create pre-clusters. Then, using BLASTP and MCL, *Roary* will create clusters, and check for paralogs. Finally, *Roary* will take every isolate and order them by presence/absence of orthologs. The summary output is present in the `summary_statistics.txt` file. In our case, the results are as follows:
+## Let's go SPAdes!
 
-Genes| Number
-|----|-------|
-|Core genes (99% <= strains <= 100%)|	2010|
-|Soft core genes (95% <= strains < 99%)| 0|
-|Shell genes (15% <= strains < 95%)| 2454|
-|Cloud genes (0% <= strains < 15%)|	0|
-|Total genes|	4464|
+Now you can use SPAdes for assembly this genome. For install SPAdes in your mac, you have to download the last version of SPAdes for Mac [here](http://bioinf.spbau.ru/en/content/spades-download-0).
 
-Additionally, *Roary* produces a `gene_presence_absence.csv` file that can be opened in any spreadsheet software to manually explore the results. In this file, you will find information such as gene name and gene annotation, and, of course, whether a gene is present in a genome or not.
+Next, open SPAdes-3.7.1-Darwin.tar.gz and open again SPAdes-3.7.1-Darwin.tar. the folder now you must move the folder SPAdes-3.7.1-Darwin to your home directoy, in my case is /Users/Enzo/SPAdes-3.7.1-Darwin. next, you must type in the terminal:
 
-We already have a phylogeny that represents the evolutionary history of this six isolates, where they form clades according to their genotype, i.e., type I isolates together, and so on.
+	cd
+	echo 'export PATH=$HOME/SPAdes-3.7.1-Darwin/bin:${PATH}' >> .bash_profile
+	source .bash_profile
 
-![phylogeny](https://raw.githubusercontent.com/microgenomics/tutorials/master/img/core_gene_alignment.tre.png)
-
-*Roary* comes with a python script that allows you to generate a few plots to graphically assess your analysis output. Try issuing the following command:
-
-		python roary_plots.py core_gene_alignment.nwk gene_presence_absence.csv
-
-You should get three files: a pangenome matrix, a frequency plot, and a pie chart. 
-
-![matrix](https://raw.githubusercontent.com/microgenomics/tutorials/master/img/pangenome_matrix.png)
-![frequency](https://raw.githubusercontent.com/microgenomics/tutorials/master/img/pangenome_frequency.png)
-![pie](https://raw.githubusercontent.com/microgenomics/tutorials/master/img/pangenome_pie.png)
-
-## Pangenome sequence analysis
-We have already Genome annotation and Pangenome analysis, but if you wanna know the sequence of a gene in particular in the pangenome you have to search by your own the sequence in the .ffn files. To avoid this inconvenient, Enzo Guerrero-Araya wrote a script in Python3 that make csv files of all loci in the pangenome. The csv's files can be imported to a database like Sqlite3.
-
-Let's put all the .ffn files in the same folder (e.g., `./ffn`) and run [*GeneratorDB.py*](https://raw.githubusercontent.com/jefesin/tutorials/patch-1/GeneratorDB.py) in the same directory where is the `gene_presence_absence.csv` file.
-		
-	python3 GeneratorDB.py ffn
-
-The script in this version will generate 4 csv files:
-
-Files| Description
-|---|---|
-|genomas_locus.csv|It contains 2 columns [name of genome, name of locus]|
-|pangenoma.csv|It contains all the information of the annotation that Roary reported in the `gene_presence_absence.csv` file|
-|pangenoma_locus.csv|It contains 2 columns [name of gene, name of locus]|
-|locus_sequence.csv|It contains 2 columns [name of locus, nucleotide sequence]|
-
-Now we have all csv files for make our own database, in terminal type:
-
-	sqlite3 database.sqlite
-
-In the sqlite3 prompt type:
+Now let's go to assemble, type in the terminal:
 	
-	create table genomas_locus (cod text, locus text);
-	create table pangenoma (gene text, non_unique_gene_name text, annotation text, no_isolates integer, no_sequences integer, avg_sequences_per_isolate integer, genome_fragment integer, order_within_fragment integer, accessory_fragment integer, accessory_order_with_fragment integer, qc text, min_group_size_nuc integer, max_group_size_nuc integer, avg_group_size_nuc integer);
-	create table pangenoma_locus (gene text, locus text);
-	create table locus_sequence (locus text, sequence text);
-	
-	.separator '|'
-	.import genomas_locus.csv genomas_locus
-	.import pangenoma.csv pangenoma
-	.import pangenoma_locus.csv pangenoma_locus
-	.import locus_sequence.csv locus_sequence
-	
-	create index genomas_locus_index on genomas_locus(cod, locus);
-	create index pangenoma_index on pangenoma(gene, non_unique_gene_name, annotation, no_isolates, no_sequences, avg_sequences_per_isolate, genome_fragment, order_within_fragment, accessory_fragment, accessory_order_with_fragment, qc, min_group_size_nuc, max_group_size_nuc, avg_group_size_nuc);
-	create index pangenoma_locus_index on pangenoma_locus(gene, locus);
-	create index locus_sequence_index on locus_sequence(locus, sequence);
+	cd demospades/
+	spades.py -s merged.assembled.fastq --threads 4 --careful --cov-cutoff auto -o spades_assembled
 
-Now just we have to join tables with sql sentences like:
-
-	select '>'|| cod || '|' || locus_sequence.locus || '|' || pangenoma.gene || x'0a' || sequence
-	from locus_sequence
-	inner join pangenoma_locus on locus_sequence.locus = pangenoma_locus.locus
-	inner join pangenoma on pangenoma_locus.gene = pangenoma.gene
-	inner join genomas_locus on locus_sequence.locus = genomas_locus.locus
-	where pangenoma.gene = 'tetC';
-	
-	>GCA_000008285_01152016|GCA_000008285_02480|tetC
-	ATGGAAAAGAAGCGGACTCGGGCAGAAGAATTAGGAATAACTAGAAGAAAAATTTTGGATACAGCACGTGATTTATTTATGGAAAAGGGTTACCGGGCAGTTTCAACAAGAGAAATAGCTAAAATTGCCAACATTACCCAACCGGCACTATATCACCACTTTGAAGATAAAGAATCCCTATATATTGAAGTGGTTCGTGAATTGACGCAAAATATCCAAGTGGAAATGCATCCAATTATGCAAGTGACCAAAGCAAAAGAAGAACAATTACATGATATGTTAATTATGTTAATTGAGGAACATCCAACCAATATTCTATTAATGATTCACGATATTCTTAATGAAATGAAACCAGAAAATCAATTTTTACTTTATAAATTATGGCAAAAAACCTATTTGGAACCATTTCAACTATTTTTTGAGCGTCTAGAAAATGCTGGCGAATTGCGTGATGGTGTCAGTGCTGAGACTGCTGCGAGATACTGTTTGTCCACTATTAGCCCTCTTTTTTCTGGGAAAGGCAGCTTTGCGCAAAAGCAAACGACTACAGAACAAATTGATGAATTAATCAACTTAATGATGTTTGGTATATGTAAAAAAGAGGTATAA
-	>GCA_000021185_01152016|GCA_000021185_00131|tetC
-	ATGGAAAAGAAGCGGACTCGAGCAGAAGAATTAGGAATAACCAGAAGGAAAATCCTTGATACAGCAAGGGATTTATTTATGGAAAAAGGGTACCGGGCAGTCTCGACAAGAGAAATTGCTAAAATTGCCAAAATTACCCAACCAGCACTTTATCACCATTTTGAAGATAAAGAATCACTTTATATTGAAGTAGTTCGTGAATTGACGCAAAATATTCAAGTGGAAATGCACCCAATTATGCAAACGAGCAAAGCAAAAGAAGAACAACTGCATGATATGTTAATCATGTTAATTGAGGAGCATCCAACCAATATTCTGCTAATGATTCATGATATTCTTAATGAAATGAAGCCAGAAAATCAATTTTTACTTTATAAATTGTGGCAAAAAACCTATTTAGAACCATTTCAAGACTTTTTTGAGCGATTAGAAAATGCTGGCGAATTGCGTGATGGTATCAGTGCTGAGACCGCTGCGAGATACTGTTTATCCACTATTAGCCCGCTTTTTTCAGGGAAAGGTAGCTTTGCGCAAAAGCAAACGACTACAGAACAAATCGATGAATTAATCAACTTAATGATGTTTGGCATATGTAAAAAAGAGGTATAA
-	>GCA_000026705_01152016|GCA_000026705_02479|tetC
-	ATGGAAAAGAAGCGGACTCGGGCAGAAGAATTAGGAATAACTAGAAGAAAAATTTTGGATACAGCACGTGATTTATTTATGGAAAAGGGTTACCGGGCAGTTTCAACAAGAGAAATAGCTAAAATTGCCAACATTACCCAACCGGCACTATATCACCACTTTGAAGATAAAGAATCCCTATATATTGAAGTGGTTCGTGAATTGACGCAAAATATCCAAGTGGAAATGCATCCAATTATGCAAGTGACCAAAGCAAAAGAAGAACAATTACATGATATGTTAATTATGTTAATTGAGGAACATCCAACCAATATTCTATTAATGATTCACGATATTCTTAATGAAATGAAACCAGAAAATCAATTTTTACTTTATAAATTATGGCAAAAAACCTATTTGGAACCATTTCAACTATTTTTTGAGCGTCTAGAAAATGCTGGCGAATTGCGTGATGGTGTCAGTGCTGAGACTGCTGCGAGATACTGTTTGTCCACTATTAGCCCTCTTTTTTCTGGGAAAGGCAGCTTTGCGCAAAAGCAAACGACTACAGAACAAATTGATGAATTAATCAACTTAATGATGTTTGGTATATGTAAAAAAGAGGTATAA
-	>GCA_000168635_01152016|GCA_000168635_02549|tetC
-	ATGGAAAAGAAGCGGACTCGAGCAGAAGAATTAGGAATAACTAGAAGAAAAATTTTGGATACAGCACGTGATTTATTTATGGAAAAGGGTTACCGGGCAGTTTCTACAAGAGAAATAGCTAAAATTGCTAACATTACCCAACCGGCACTTTATCATCACTTTGAAGATAAAGAATCCCTATATATTGAAGTGGTTCGTGAATTGACGCAAAATATCCAGGTGGAAATGCATCCAATTATGCAAACGAACAAAGCAAAAGAAGAACAATTACATGATATGTTAATTATGTTAATTGAGGAACATCCCACCAATATTCTATTAATGATTCACGATATTCTTAATGAAATGAAACCAGAGAATCAATTTTTACTTTATAAATTATGGCAAAAAACCTATTTAGAACCATTTCAACAATTTTTTGAGCGTCTAGAAAATGCTGGTGAATTGCGTAATGGTATCAGTGCTGAGACCGCTGCAAGATACTGTTTGTCCACTATTAGCCCTCTTTTTTCAGGGAAAGGTAGCTTTGCGCAAAAGCAAACGACTACAGAACAAATCGATGAATTAATCAACTTAATGATGTTTGGCATATGTAAAAAAGAGGTATAA
-	>GCA_000168815_01152016|GCA_000168815_01572|tetC
-	ATGGAAAAGAAGCGGACTCGGGCAGAAGAATTAGGAATAACTAGAAGAAAAATTTTGGATACAGCACGTGATTTATTTATGGAAAAGGGTTACCGGGCAGTTTCAACAAGAGAAATAGCTAAAATTGCCAACATTACCCAACCGGCACTATATCACCACTTTGAAGATAAAGAATCCCTATATATTGAAGTGGTTCGTGAATTGACGCAAAATATCCAAGTGGAAATGCATCCAATTATGCAAGTGACCAAAGCAAAAGAAGAACAATTACATGATATGTTAATTATGTTAATTGAGGAACATCCAACCAATATTCTATTAATGATTCACGATATTCTTAATGAAATGAAACCAGAAAATCAATTTTTACTTTATAAATTATGGCAAAAAACCTATTTGGAACCATTTCAACTATTTTTTGAGCGTCTAGAAAATGCTGGCGAATTGCGTGATGGTGTCAGTGCTGAGACTGCTGCGAGATACTGTTTGTCCACTATTAGCCCTCTTTTTTCTGGGAAAGGCAGCTTTGCGCAAAAGCAAACGACTACAGAACAAATTGATGAATTAATCAACTTAATGATGTTTGGTATATGTAAAAAAGAGGTATAA
-	>GCA_000196035_01152016|GCA_000196035_02552|tetC
-	ATGGAAAAGAAGCGGACTCGAGCAGAAGAATTAGGAATAACTAGAAGAAAAATTTTGGATACAGCACGTGATTTATTTATGGAAAAGGGTTACCGGGCAGTTTCTACAAGAGAAATAGCTAAAATTGCCAACATTACCCAACCGGCACTGTATCATCACTTTGAAGATAAAGAATCCCTATATATTGAAGTGGTTCGTGAATTGACGCAAAATATCCAGGTGGAAATGCATCCAATTATGCAAACGAACAAAGCAAAAGAAGAACAATTACATGATATGTTAATTATGTTAATTGAGGAACATCCCACCAATATTCTATTAATGATTCACGATATTCTTAATGAAATGAAACCAGAGAATCAATTTTTACTTTATAAATTATGGCAAAAAACCTATTTAGAACCATTTCAACAATTTTTTGAGCGTCTAGAAAATGCTGGTGAATTGCGTAATGGTATCAGTGCTGAGACCGCTGCAAGATACTGTTTGTCCACTATTAGCCCTCTTTTTTCAGGGAAAGGTAGCTTTGCGCAAAAGCAAACGACTACAGAACAAATCGATGAATTAATCAACTTAATGATGTTTGGCATATGTAAAAAAGAGGTATAA
-
-And thats its all. we get all sequences in fasta format of tetC gene.
  
 
 ## Citation

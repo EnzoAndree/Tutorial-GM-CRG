@@ -7,3 +7,4 @@ This is a repository of manuals and tutorials of bioinformatics stuff for beginn
 ### List of materials
 
 * [A pipeline for the de novo assembly](DeNovoAssembly.md)
+* Make a phylogenetic tree

@@ -7,7 +7,7 @@ This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and
 
 ## Obtaining data
 
-You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software) site and download MacOS 64 bit architecture file. Double-click on sratoolkit.2.5.7-mac64.tar.gz to uncompress the file and again on sratoolkit.2.5.7-mac64.tar. Now you must move the folder sratoolkit.2.5.7-mac64 to your home directoy, in my case is /Users/Enzo/sratoolkit.2.5.7-mac64. next, you must open the terminal, the easy way is pressing **CMD ⌘ + SPACE** and type "terminal" and click on it, or press Intro:
+You need to install SRA toolkit so go to [this](http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software) site and download MacOS 64 bit architecture file. Double-click on sratoolkit.2.5.7-mac64.tar.gz to uncompress the file and again on sratoolkit.2.5.7-mac64.tar. Now you must move the folder sratoolkit.2.5.7-mac64 to your home directoy, in my case is /Users/Enzo/sratoolkit.2.5.7-mac64. next, you must open the terminal, the easy way is pressing **CMD ⌘ + SPACEBAR** and type "terminal" and click on it, or press Intro:
 
 ![Open terminal](https://raw.githubusercontent.com/eandree/TutorialDeNovoAssembly/master/img/open-terminal.png)
 

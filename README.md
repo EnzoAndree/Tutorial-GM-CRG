@@ -1,7 +1,6 @@
 ![The Gut Microbiota and Clostridia Research](img/GM&CR.png)
 
 # A pipeline for the de novo assembly of paired-end Illumina reads using SPAdes
--------------------------
 #### This pipeline takes 7 hours in a MacBook Air 1,3 GHz Intel Core i5 4 GB 1600 MHz DDR3 and need ≈10 Gb in your hard drive
 
 This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and *Prokka* so please remember to cite them if you end up publishing results obtained with these tools.

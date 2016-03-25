@@ -34,7 +34,7 @@ Go to folder demospades, there you have 2 fastq (~ 4,73 GB) from *Mycoplasma myc
 
 ![genomes](img/demospades.png)
 
-## Genome assembly
+## Quality control
 
 In the fastq we have the rawdata of the sequencer, in this demo is from a Illumina HiSeq 2000. First of all, we need to analyze the quality of our reads. For this we going to use FastQC, a multiplataform wrote in java. In mac you have to download the file whit extension .DMG from [here](http://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc).
 
@@ -56,7 +56,7 @@ Either way, in the next step, we going to filter and merge the reads by quality 
 
 ## Filter and merge of the reads
 
-PEAR is a program write in C, so this step will be very fast, first of all we need download and install the program following [this tutorial](http://sco.h-its.org/exelixis/web/software/pear/doc.html#installing) in summary you must type this:
+PEAR is a program write in C, so this step will be very fast (less than 40 minutes), first of all we need download and install the program following [this tutorial](http://sco.h-its.org/exelixis/web/software/pear/doc.html#installing) in summary you must type this:
 
 	mkdir $HOME/pear
 	git clone https://github.com/xflouris/PEAR.git
@@ -112,7 +112,9 @@ Now let's go to assemble, type in the terminal:
 	cd demospades/
 	spades.py -s merged.assembled.fastq --threads 4 --careful --cov-cutoff auto -o spades_assembled
 
-Inside of folder that you set before "spades_assembled", you have a lot of files, in summary, you output files and in consequence your final assembly are content in 2 files, **contigs.fasta** and **scaffolds.fasta**, this is, the **contigs** and **scaffolds** of assembly respectively
+###At this point you can go do something else, make a coffee ☕️ or whatever, because this will take 5 or 6 hours.
+
+When SPAdes finished, inside of folder that you set before "spades_assembled", you have a lot of files, in summary, you output files and in consequence your final assembly are content in 2 files, **contigs.fasta** and **scaffolds.fasta**, this is, the **contigs** and **scaffolds** of assembly respectively
 
 ## And now what?
 

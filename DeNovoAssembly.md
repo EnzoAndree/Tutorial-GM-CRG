@@ -3,6 +3,7 @@
 # A pipeline for the de novo assembly of paired-end Illumina reads using SPAdes
 #### This pipeline takes 7 hours in a MacBook Air 1,3 GHz Intel Core i5 4 GB 1600 MHz DDR3 and need ≈10 Gb in your hard drive
 
+
 This demo relies on four pieces of software, *SRA toolkit*, *PEAR*, *SPAdes* and *Prokka* so please remember to cite them if you end up publishing results obtained with these tools.
 
 ## Obtaining data
@@ -142,6 +143,8 @@ This is a description of the output files from the Prokka documentation.
 | .txt | Statistics relating to the annotated features found. |
 
 ## Author notes
+
+###### Enzo Guerrero-Araya
 
 To the end of this tutorial you get a genome assembly and annotation. Nevertheless this is a general tutorial and does not take account problems like contamination of library. For example, for anterior problem you must to filter the raw data in positive, in this case remove all reads that match with human genome or plant genome.
 

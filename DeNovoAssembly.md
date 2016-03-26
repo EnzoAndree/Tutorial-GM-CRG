@@ -14,7 +14,7 @@ You must open the terminal, the easy way is pressing **CMD ⌘ + SPACEBAR** and 
 
 ![Open terminal](img/open-terminal.png)
 
-Congratulation!, you are a bioinformatic now 😎.
+Congratulation!, you are a bioinformatics now 😎.
 
 ![blank terminal](img/blank-terminal.png)
 
